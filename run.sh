@@ -3,7 +3,7 @@
 #SBATCH --output=out/cheetah_bisim_out.%j                            # indicates a file to redirect STDOUT to; %j is the jobid 
 #SBATCH --error=out/cheetah_bisim_err_out.%j                             # indicates a file to redirect STDERR to; %j is the jobid
 #SBATCH --time=48:00:00                                          # how long you think your job will take to complete; format=hh:mm:ss
-#SBATCH --qos=medium                                          # set QOS, this will determine what resources can be requested
+#SBATCH --qos=default                                       # set QOS, this will determine what resources can be requested
 #SBATCH --mem=16GB                                              # memory required by job; if unit is not specified MB will be assumed
 #SBATCH --gres=gpu:1
 #SBATCH --account=furongh
