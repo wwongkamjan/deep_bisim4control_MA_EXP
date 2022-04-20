@@ -20,7 +20,6 @@ from video import VideoRecorder
 from agent.baseline_agent import BaselineAgent
 from agent.bisim_agent import BisimAgent
 from agent.deepmdp_agent import DeepMDPAgent
-from agents.navigation.carla_env import CarlaEnv
 
 
 def parse_args():
