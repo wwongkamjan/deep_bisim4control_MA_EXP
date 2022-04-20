@@ -4,7 +4,7 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
-from envs.n_body_problem import Planets, Electrons, IdealGas
+from n_body_problem import Planets, Electrons, IdealGas
 
 
 # env1 = Planets(num_bodies=10, num_dimensions=2, dt=0.01, contained_in_a_box=True)
