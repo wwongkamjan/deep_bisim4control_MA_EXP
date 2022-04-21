@@ -30,7 +30,7 @@
     "frame_stack": 3,
     "hidden_dim": 256,
     "image_size": 84,
-    "img_source": null,
+    "img_source": "video",
     "init_steps": 1000,
     "init_temperature": 0.01,
     "k": 3,
