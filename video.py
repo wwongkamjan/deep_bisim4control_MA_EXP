@@ -22,6 +22,7 @@ class VideoRecorder(object):
         self.frames = []
         if resource_files:
             files = glob.glob(os.path.expanduser(resource_files))
+            print('check if files are loaded: ', files)
             self._bg_source = RandomVideoSource((height, width), files, grayscale=False, total_frames=1000)
         else:
             self._bg_source = None
