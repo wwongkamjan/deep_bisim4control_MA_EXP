@@ -40,7 +40,7 @@
     "num_layers": 4,
     "num_train_steps": 1000000,
     "port": 2000,
-    "render": false,
+    "render": true,
     "replay_buffer_capacity": 100000,
     "resource_files": "distractors/images/*.mp4",
     "save_buffer": false,
