@@ -157,6 +157,7 @@ class RandomVideoSource(ImageSource):
             self.arr = np.zeros((self.total_frames, self.shape[0], self.shape[1]) + ((3,) if not self.grayscale else (1,)))
             total_frame_i = 0
             file_i = 0
+            print('build_arr_for_random_vid')
             with tqdm.tqdm(total=self.total_frames, desc="Loading videos for natural") as pbar:
                 while total_frame_i < self.total_frames:
                     if file_i % len(self.filelist) == 0: random.shuffle(self.filelist)
