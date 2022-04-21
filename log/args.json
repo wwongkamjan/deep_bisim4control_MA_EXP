@@ -26,7 +26,7 @@
     "encoder_tau": 0.005,
     "encoder_type": "pixel",
     "eval_freq": 10,
-    "eval_resource_files": null,
+    "eval_resource_files": "distractors/images/*.mp4",
     "frame_stack": 3,
     "hidden_dim": 256,
     "image_size": 84,
