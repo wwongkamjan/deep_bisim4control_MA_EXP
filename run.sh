@@ -14,6 +14,6 @@ module add Python3/3.6.4
 
 export MJLIB_PATH=/nfshomes/wwongkam/.mujoco/mujoco200/bin/libmujoco200.so
 
-srun bash -c "hostname; python train.py --eval_resource_files 'distractors/images/*.mp4' --resource_files 'distractors/images/*.mp4' --domain_name cheetah --task_name run --encoder_type pixel --decoder_type identity --action_repeat 4 --save_video --save_tb --work_dir ./log --seed 2"
+srun bash -c "hostname; python train.py --img_source video --eval_resource_files './distractors/images/idealgas0.mp4' --resource_files './distractors/images/idealgas0.mp4' --domain_name cheetah --task_name run --encoder_type pixel --decoder_type identity --action_repeat 4 --save_video --save_tb --work_dir ./log --seed 1"
 
 # once the end of the batch script is reached your job allocation will be revoked
