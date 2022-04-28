@@ -101,6 +101,7 @@ class DMCWrapper(core.Env):
 
         # background
         if img_source is not None:
+            print(files)
             shape2d = (height, width)
             if img_source == "color":
                 self._bg_source = natural_imgsource.RandomColorSource(shape2d)
