@@ -1,0 +1,71 @@
+cml07.umiacs.umd.edu
+./distractors/images/drivingcar1.mp4
+build_arr_for_random_vid
+./distractors/images/drivingcar1.mp4
+build_arr_for_random_vid
+build_arr_for_random_vid
+Deterministic transition model chosen.
+| [32meval[0m | S: 0 | ER: 2.2315
+| [33mtrain[0m | E: 1 | S: 250 | D: 17.5 s | R: 0.0000 | BR: 0.0000 | ALOSS: 0.0000 | CLOSS: 0.0000 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 2 | S: 500 | D: 0.4 s | R: 7.7473 | BR: 0.0000 | ALOSS: 0.0000 | CLOSS: 0.0000 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 3 | S: 750 | D: 0.4 s | R: 4.4276 | BR: 0.0000 | ALOSS: 0.0000 | CLOSS: 0.0000 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 4 | S: 1000 | D: 0.4 s | R: 5.0504 | BR: 0.0000 | ALOSS: 0.0000 | CLOSS: 0.0000 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 5 | S: 1250 | D: 281.7 s | R: 17.8550 | BR: 0.0352 | ALOSS: -0.3034 | CLOSS: 0.0055 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 6 | S: 1500 | D: 54.0 s | R: 8.7907 | BR: 0.0356 | ALOSS: -0.5210 | CLOSS: 0.0021 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 7 | S: 1750 | D: 54.0 s | R: 11.2126 | BR: 0.0377 | ALOSS: -0.5571 | CLOSS: 0.0028 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 8 | S: 2000 | D: 54.0 s | R: 12.6296 | BR: 0.0409 | ALOSS: -0.6151 | CLOSS: 0.0034 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 9 | S: 2250 | D: 54.0 s | R: 18.5731 | BR: 0.0444 | ALOSS: -0.6832 | CLOSS: 0.0039 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 10 | S: 2500 | D: 54.0 s | R: 15.5584 | BR: 0.0481 | ALOSS: -0.7254 | CLOSS: 0.0035 | RLOSS: 0.0000 | MR: 0.0000
+| [32meval[0m | S: 2500 | ER: 17.4566
+| [33mtrain[0m | E: 11 | S: 2750 | D: 70.4 s | R: 25.6342 | BR: 0.0506 | ALOSS: -0.7742 | CLOSS: 0.0033 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 12 | S: 3000 | D: 54.0 s | R: 9.4019 | BR: 0.0522 | ALOSS: -0.8301 | CLOSS: 0.0054 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 13 | S: 3250 | D: 54.0 s | R: 24.9835 | BR: 0.0564 | ALOSS: -0.9198 | CLOSS: 0.0072 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 14 | S: 3500 | D: 54.0 s | R: 33.6043 | BR: 0.0669 | ALOSS: -0.9925 | CLOSS: 0.0076 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 15 | S: 3750 | D: 54.0 s | R: 48.2136 | BR: 0.0702 | ALOSS: -1.0981 | CLOSS: 0.0105 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 16 | S: 4000 | D: 54.0 s | R: 18.5314 | BR: 0.0740 | ALOSS: -1.1951 | CLOSS: 0.0107 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 17 | S: 4250 | D: 54.0 s | R: 41.9437 | BR: 0.0806 | ALOSS: -1.2990 | CLOSS: 0.0127 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 18 | S: 4500 | D: 54.0 s | R: 45.7099 | BR: 0.0852 | ALOSS: -1.3916 | CLOSS: 0.0128 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 19 | S: 4750 | D: 54.0 s | R: 50.3983 | BR: 0.0920 | ALOSS: -1.5017 | CLOSS: 0.0152 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 20 | S: 5000 | D: 54.0 s | R: 43.1260 | BR: 0.0940 | ALOSS: -1.6056 | CLOSS: 0.0144 | RLOSS: 0.0000 | MR: 0.0000
+| [32meval[0m | S: 5000 | ER: 23.1357
+| [33mtrain[0m | E: 21 | S: 5250 | D: 70.3 s | R: 22.9552 | BR: 0.0956 | ALOSS: -1.7098 | CLOSS: 0.0170 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 22 | S: 5500 | D: 54.0 s | R: 47.4628 | BR: 0.0990 | ALOSS: -1.8171 | CLOSS: 0.0146 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 23 | S: 5750 | D: 54.0 s | R: 23.6508 | BR: 0.0969 | ALOSS: -1.9094 | CLOSS: 0.0141 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 24 | S: 6000 | D: 54.0 s | R: 26.1352 | BR: 0.0980 | ALOSS: -2.0163 | CLOSS: 0.0179 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 25 | S: 6250 | D: 54.0 s | R: 19.3826 | BR: 0.0986 | ALOSS: -2.1249 | CLOSS: 0.0193 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 26 | S: 6500 | D: 54.0 s | R: 45.4285 | BR: 0.1038 | ALOSS: -2.2409 | CLOSS: 0.0245 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 27 | S: 6750 | D: 54.0 s | R: 61.5201 | BR: 0.1084 | ALOSS: -2.3357 | CLOSS: 0.0190 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 28 | S: 7000 | D: 54.0 s | R: 36.9022 | BR: 0.1100 | ALOSS: -2.4352 | CLOSS: 0.0220 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 29 | S: 7250 | D: 54.0 s | R: 39.0317 | BR: 0.1093 | ALOSS: -2.5337 | CLOSS: 0.0257 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 30 | S: 7500 | D: 54.0 s | R: 24.2293 | BR: 0.1102 | ALOSS: -2.6206 | CLOSS: 0.0267 | RLOSS: 0.0000 | MR: 0.0000
+| [32meval[0m | S: 7500 | ER: 29.0639
+| [33mtrain[0m | E: 31 | S: 7750 | D: 70.3 s | R: 47.5888 | BR: 0.1118 | ALOSS: -2.7079 | CLOSS: 0.0260 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 32 | S: 8000 | D: 54.0 s | R: 16.7581 | BR: 0.1107 | ALOSS: -2.7718 | CLOSS: 0.0297 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 33 | S: 8250 | D: 53.9 s | R: 22.5191 | BR: 0.1088 | ALOSS: -2.8591 | CLOSS: 0.0270 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 34 | S: 8500 | D: 53.5 s | R: 17.9223 | BR: 0.1077 | ALOSS: -2.9120 | CLOSS: 0.0310 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 35 | S: 8750 | D: 53.5 s | R: 20.6510 | BR: 0.1084 | ALOSS: -3.0007 | CLOSS: 0.0310 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 36 | S: 9000 | D: 53.5 s | R: 25.7891 | BR: 0.1074 | ALOSS: -3.0661 | CLOSS: 0.0370 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 37 | S: 9250 | D: 53.5 s | R: 37.7169 | BR: 0.1083 | ALOSS: -3.1534 | CLOSS: 0.0332 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 38 | S: 9500 | D: 53.5 s | R: 15.2425 | BR: 0.1070 | ALOSS: -3.1943 | CLOSS: 0.0356 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 39 | S: 9750 | D: 53.5 s | R: 19.4910 | BR: 0.1070 | ALOSS: -3.2535 | CLOSS: 0.0354 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 40 | S: 10000 | D: 53.5 s | R: 25.8218 | BR: 0.1066 | ALOSS: -3.3135 | CLOSS: 0.0477 | RLOSS: 0.0000 | MR: 0.0000
+| [32meval[0m | S: 10000 | ER: 32.9931
+| [33mtrain[0m | E: 41 | S: 10250 | D: 75.9 s | R: 32.1303 | BR: 0.1078 | ALOSS: -3.3839 | CLOSS: 0.0457 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 42 | S: 10500 | D: 53.6 s | R: 29.1887 | BR: 0.1085 | ALOSS: -3.4480 | CLOSS: 0.0466 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 43 | S: 10750 | D: 53.6 s | R: 50.9048 | BR: 0.1106 | ALOSS: -3.5284 | CLOSS: 0.0459 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 44 | S: 11000 | D: 53.9 s | R: 38.8185 | BR: 0.1112 | ALOSS: -3.5959 | CLOSS: 0.0416 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 45 | S: 11250 | D: 54.0 s | R: 38.4766 | BR: 0.1115 | ALOSS: -3.6825 | CLOSS: 0.0534 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 46 | S: 11500 | D: 54.0 s | R: 25.2212 | BR: 0.1132 | ALOSS: -3.7867 | CLOSS: 0.0500 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 47 | S: 11750 | D: 54.0 s | R: 40.3500 | BR: 0.1130 | ALOSS: -3.8392 | CLOSS: 0.0488 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 48 | S: 12000 | D: 54.1 s | R: 36.5405 | BR: 0.1139 | ALOSS: -3.9264 | CLOSS: 0.0564 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 49 | S: 12250 | D: 54.0 s | R: 50.4544 | BR: 0.1157 | ALOSS: -4.0396 | CLOSS: 0.0688 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 50 | S: 12500 | D: 54.0 s | R: 29.4880 | BR: 0.1146 | ALOSS: -4.1178 | CLOSS: 0.0618 | RLOSS: 0.0000 | MR: 0.0000
+| [32meval[0m | S: 12500 | ER: 32.3113
+| [33mtrain[0m | E: 51 | S: 12750 | D: 70.5 s | R: 28.4657 | BR: 0.1145 | ALOSS: -4.1775 | CLOSS: 0.0670 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 52 | S: 13000 | D: 54.0 s | R: 17.6731 | BR: 0.1151 | ALOSS: -4.2836 | CLOSS: 0.0697 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 53 | S: 13250 | D: 54.0 s | R: 42.3015 | BR: 0.1164 | ALOSS: -4.3906 | CLOSS: 0.0816 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 54 | S: 13500 | D: 54.0 s | R: 69.4295 | BR: 0.1193 | ALOSS: -4.4828 | CLOSS: 0.0790 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 55 | S: 13750 | D: 54.0 s | R: 38.1035 | BR: 0.1201 | ALOSS: -4.5626 | CLOSS: 0.0753 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 56 | S: 14000 | D: 54.0 s | R: 35.5394 | BR: 0.1196 | ALOSS: -4.6289 | CLOSS: 0.0908 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 57 | S: 14250 | D: 54.0 s | R: 42.5866 | BR: 0.1213 | ALOSS: -4.7175 | CLOSS: 0.0882 | RLOSS: 0.0000 | MR: 0.0000
+| [33mtrain[0m | E: 58 | S: 14500 | D: 54.0 s | R: 53.7078 | BR: 0.1218 | ALOSS: -4.7643 | CLOSS: 0.0956 | RLOSS: 0.0000 | MR: 0.0000
