@@ -171,6 +171,7 @@ class RandomVideoSource(ImageSource):
                             self.arr[total_frame_i] = cv2.resize(frames[frame_i], (self.shape[1], self.shape[0]))[..., None] ## THIS IS NOT A BUG! cv2 uses (width, height)
                         else:
                             self.arr[total_frame_i] = cv2.resize(frames[frame_i], (self.shape[1], self.shape[0])) 
+                        cv2.imwrite('frame_{}'.format(total_frame_i), self.arr[total_frame_i])
                         pbar.update(1)
                         total_frame_i += 1
 
