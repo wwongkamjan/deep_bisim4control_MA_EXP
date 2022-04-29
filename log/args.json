@@ -47,7 +47,7 @@
     "save_model": false,
     "save_tb": true,
     "save_video": true,
-    "seed": 1,
+    "seed": 2,
     "task_name": "run",
     "total_frames": 1000,
     "transition_model_type": "",
