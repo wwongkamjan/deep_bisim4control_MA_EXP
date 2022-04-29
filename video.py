@@ -3,7 +3,6 @@
 
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
-
 import imageio
 import os
 import numpy as np
@@ -41,6 +40,7 @@ class VideoRecorder(object):
             if self._bg_source:
                 mask = np.logical_and((frame[:, :, 2] > frame[:, :, 1]), (frame[:, :, 2] > frame[:, :, 0]))  # hardcoded for dmc
                 bg = self._bg_source.get_image()
+                
                 frame[mask] = bg[mask]
             self.frames.append(frame)
 
