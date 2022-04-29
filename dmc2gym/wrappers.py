@@ -139,7 +139,7 @@ class DMCWrapper(core.Env):
                 
                 obs[mask] = bg[mask]
             obs = obs.transpose(2, 0, 1).copy()
-            cv2.imwrite('obs_from_get_obs_wrapper.png', bg)
+            cv2.imwrite('obs_from_get_obs_wrapper.png', obs)
         else:
             obs = _flatten_obs(time_step.observation)
         return obs
