@@ -136,7 +136,7 @@ class DMCWrapper(core.Env):
             if self._img_source is not None:
                 mask = np.logical_and((obs[:, :, 2] > obs[:, :, 1]), (obs[:, :, 2] > obs[:, :, 0]))  # hardcoded for dmc
                 bg = self._bg_source.get_image()
-                cv2.imwrite('frame_from_get_obs_wrapper.png', bg[mask])
+                cv2.imwrite('frame_from_get_obs_wrapper.png', bg)
                 obs[mask] = bg[mask]
             obs = obs.transpose(2, 0, 1).copy()
         else:
