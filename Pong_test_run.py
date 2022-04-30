@@ -3,7 +3,7 @@ from stable_baselines3 import PPO
 from pettingzoo.atari import pong_v2
 import supersuit as ss
 import PIL
-env = pong_v3.parallel_env(num_players=2)
+env = pong_v2.parallel_env(num_players=2)
 env = ss.color_reduction_v0(env, mode='B')
 env = ss.resize_v1(env, x_size=84, y_size=84)
 env = ss.frame_stack_v1(env, 3)
@@ -16,7 +16,7 @@ model.save('policy')
 
 frame_list = []
         
-env = pong_v3.env()
+env = pong_v2.env()
 env = ss.color_reduction_v0(env, mode='B')
 env = ss.resize_v1(env, x_size=84, y_size=84)
 env = ss.frame_stack_v1(env, 3)
