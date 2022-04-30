@@ -13,6 +13,7 @@ import time
 import json
 import dmc2gym
 
+
 import utils
 from logger import Logger
 from video import VideoRecorder
@@ -225,38 +226,6 @@ def make_agent(obs_shape, action_shape, args, device):
             num_filters=args.num_filters,
             bisim_coef=args.bisim_coef
         )
-    elif args.agent == 'deepmdp':
-        agent = DeepMDPAgent(
-            obs_shape=obs_shape,
-            action_shape=action_shape,
-            device=device,
-            hidden_dim=args.hidden_dim,
-            discount=args.discount,
-            init_temperature=args.init_temperature,
-            alpha_lr=args.alpha_lr,
-            alpha_beta=args.alpha_beta,
-            actor_lr=args.actor_lr,
-            actor_beta=args.actor_beta,
-            actor_log_std_min=args.actor_log_std_min,
-            actor_log_std_max=args.actor_log_std_max,
-            actor_update_freq=args.actor_update_freq,
-            encoder_stride=args.encoder_stride,
-            critic_lr=args.critic_lr,
-            critic_beta=args.critic_beta,
-            critic_tau=args.critic_tau,
-            critic_target_update_freq=args.critic_target_update_freq,
-            encoder_type=args.encoder_type,
-            encoder_feature_dim=args.encoder_feature_dim,
-            encoder_lr=args.encoder_lr,
-            encoder_tau=args.encoder_tau,
-            decoder_type=args.decoder_type,
-            decoder_lr=args.decoder_lr,
-            decoder_update_freq=args.decoder_update_freq,
-            decoder_weight_lambda=args.decoder_weight_lambda,
-            transition_model_type=args.transition_model_type,
-            num_layers=args.num_layers,
-            num_filters=args.num_filters
-        )
 
     if args.load_encoder:
         model_dict = agent.actor.encoder.state_dict()
@@ -267,54 +236,40 @@ def make_agent(obs_shape, action_shape, args, device):
 
     return agent
 
-
 def main():
     args = parse_args()
     utils.set_seed_everywhere(args.seed)
 
-    if args.domain_name == 'carla':
-        env = CarlaEnv(
-            render_display=args.render,  # for local debugging only
-            display_text=args.render,  # for local debugging only
-            changing_weather_speed=0.1,  # [0, +inf)
-            rl_image_size=args.image_size,
-            max_episode_steps=1000,
-            frame_skip=args.action_repeat,
-            is_other_cars=True,
-            port=args.port
-        )
-        # TODO: implement env.seed(args.seed) ?
+    
+    env = dmc2gym.make(
+        domain_name=args.domain_name,
+        task_name=args.task_name,
+        resource_files=args.resource_files,
+        img_source=args.img_source,
+        total_frames=args.total_frames,
+        seed=args.seed,
+        visualize_reward=False,
+        from_pixels=(args.encoder_type == 'pixel'),
+        height=args.image_size,
+        width=args.image_size,
+        frame_skip=args.action_repeat
+    )
+    
+    env.seed(args.seed)
 
-        eval_env = env
-    else:
-        env = dmc2gym.make(
-            domain_name=args.domain_name,
-            task_name=args.task_name,
-            resource_files=args.resource_files,
-            img_source=args.img_source,
-            total_frames=args.total_frames,
-            seed=args.seed,
-            visualize_reward=False,
-            from_pixels=(args.encoder_type == 'pixel'),
-            height=args.image_size,
-            width=args.image_size,
-            frame_skip=args.action_repeat
-        )
-        env.seed(args.seed)
-
-        eval_env = dmc2gym.make(
-            domain_name=args.domain_name,
-            task_name=args.task_name,
-            resource_files=args.eval_resource_files,
-            img_source=args.img_source,
-            total_frames=args.total_frames,
-            seed=args.seed,
-            visualize_reward=False,
-            from_pixels=(args.encoder_type == 'pixel'),
-            height=args.image_size,
-            width=args.image_size,
-            frame_skip=args.action_repeat
-        )
+    eval_env = dmc2gym.make(
+        domain_name=args.domain_name,
+        task_name=args.task_name,
+        resource_files=args.eval_resource_files,
+        img_source=args.img_source,
+        total_frames=args.total_frames,
+        seed=args.seed,
+        visualize_reward=False,
+        from_pixels=(args.encoder_type == 'pixel'),
+        height=args.image_size,
+        width=args.image_size,
+        frame_skip=args.action_repeat
+    )
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
@@ -326,7 +281,7 @@ def main():
     model_dir = utils.make_dir(os.path.join(args.work_dir, 'model'))
     buffer_dir = utils.make_dir(os.path.join(args.work_dir, 'buffer'))
 
-    video = VideoRecorder(video_dir if args.save_video else None)
+    video = VideoRecorder(video_dir if args.save_video else None, resource_files=args.resource_files)
 
     with open(os.path.join(args.work_dir, 'args.json'), 'w') as f:
         json.dump(vars(args), f, sort_keys=True, indent=4)
