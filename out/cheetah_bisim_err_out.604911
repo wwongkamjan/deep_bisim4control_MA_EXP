@@ -1,0 +1,46 @@
+/cmlscratch/wwongkam/anaconda3/envs/dbc/lib/python3.6/site-packages/gym/logger.py:34: UserWarning: [33mWARN: Box bound precision lowered by casting to float32[0m
+  warnings.warn(colorize("%s: %s" % ("WARN", msg % args), "yellow"))
+Loading videos for natural:   0%|          | 0/1000 [00:00<?, ?it/s]Loading videos for natural:   0%|          | 1/1000 [00:31<8:44:18, 31.49s/it]Loading videos for natural: 100%|██████████| 1000/1000 [00:31<00:00, 31.71it/s]
+Loading videos for natural:   0%|          | 0/1000 [00:00<?, ?it/s]Loading videos for natural:   0%|          | 1/1000 [00:31<8:43:33, 31.45s/it]Loading videos for natural: 100%|██████████| 1000/1000 [00:31<00:00, 31.75it/s]
+Loading videos for natural:   0%|          | 0/1000 [00:00<?, ?it/s]Loading videos for natural:   0%|          | 1/1000 [00:34<9:28:16, 34.13s/it]Loading videos for natural:  26%|██▌       | 259/1000 [00:34<01:08, 10.78it/s]Loading videos for natural:  52%|█████▏    | 517/1000 [00:34<00:18, 25.99it/s]Loading videos for natural:  78%|███████▊  | 775/1000 [00:34<00:04, 47.12it/s]Loading videos for natural:  98%|█████████▊| 983/1000 [00:34<00:00, 70.24it/s]Loading videos for natural: 100%|██████████| 1000/1000 [00:34<00:00, 28.79it/s]
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/torch/cuda/__init__.py:143: UserWarning: 
+NVIDIA RTX A4000 with CUDA capability sm_86 is not compatible with the current PyTorch installation.
+The current PyTorch install supports CUDA capabilities sm_37 sm_50 sm_60 sm_70.
+If you want to use the NVIDIA RTX A4000 GPU with PyTorch, please check the instructions at https://pytorch.org/get-started/locally/
+
+  warnings.warn(incompatible_device_warn.format(device_name, capability, " ".join(arch_list), device_name))
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:516: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint8 = np.dtype([("qint8", np.int8, 1)])
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:517: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint8 = np.dtype([("quint8", np.uint8, 1)])
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:518: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint16 = np.dtype([("qint16", np.int16, 1)])
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:519: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_quint16 = np.dtype([("quint16", np.uint16, 1)])
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:520: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  _np_qint32 = np.dtype([("qint32", np.int32, 1)])
+/nfshomes/wwongkam/.local/lib/python3.6/site-packages/tensorflow/python/framework/dtypes.py:525: FutureWarning: Passing (type, 1) or '1type' as a synonym of type is deprecated; in a future version of numpy, it will be understood as (type, (1,)) / '(1,)type'.
+  np_resource = np.dtype([("resource", np.ubyte, 1)])
+Traceback (most recent call last):
+  File "train.py", line 448, in <module>
+    main()
+  File "train.py", line 372, in main
+    evaluate(eval_env, agent, video, args.num_eval_episodes, L, step)
+  File "train.py", line 117, in evaluate
+    action = agent.select_action(obs)
+  File "/cmlscratch/wwongkam/deep_bisim4control_MA_EXP/agent/bisim_agent.py", line 142, in select_action
+    obs, compute_pi=False, compute_log_pi=False
+  File "/nfshomes/wwongkam/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cmlscratch/wwongkam/deep_bisim4control_MA_EXP/sac_ae.py", line 79, in forward
+    obs = self.encoder(obs, detach=detach_encoder)
+  File "/nfshomes/wwongkam/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "/cmlscratch/wwongkam/deep_bisim4control_MA_EXP/encoder.py", line 59, in forward
+    h = self.forward_conv(obs)
+  File "/cmlscratch/wwongkam/deep_bisim4control_MA_EXP/encoder.py", line 45, in forward_conv
+    obs = obs / 255.
+RuntimeError: CUDA error: no kernel image is available for execution on the device
+CUDA kernel errors might be asynchronously reported at some other API call,so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1.
+srun: error: cml24: task 0: Exited with exit code 1
