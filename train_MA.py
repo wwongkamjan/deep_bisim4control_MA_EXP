@@ -12,6 +12,7 @@ import gym
 import time
 import json
 import dmc2gym
+from pettingzoo.atari import pong_v2
 
 
 import utils
@@ -241,35 +242,11 @@ def main():
     utils.set_seed_everywhere(args.seed)
 
     
-    env = dmc2gym.make(
-        domain_name=args.domain_name,
-        task_name=args.task_name,
-        resource_files=args.resource_files,
-        img_source=args.img_source,
-        total_frames=args.total_frames,
-        seed=args.seed,
-        visualize_reward=False,
-        from_pixels=(args.encoder_type == 'pixel'),
-        height=args.image_size,
-        width=args.image_size,
-        frame_skip=args.action_repeat
-    )
-    
+    env = pong_v2.env(num_players=2)
+
     env.seed(args.seed)
 
-    eval_env = dmc2gym.make(
-        domain_name=args.domain_name,
-        task_name=args.task_name,
-        resource_files=args.eval_resource_files,
-        img_source=args.img_source,
-        total_frames=args.total_frames,
-        seed=args.seed,
-        visualize_reward=False,
-        from_pixels=(args.encoder_type == 'pixel'),
-        height=args.image_size,
-        width=args.image_size,
-        frame_skip=args.action_repeat
-    )
+    eval_env = pong_v2.env(num_players=2)
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
