@@ -149,6 +149,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
         self._screen = None
         self.seed(seed)
+        print('from my system!!')
 
     def seed(self, seed=None):
         if seed is None:

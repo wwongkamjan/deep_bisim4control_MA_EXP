@@ -40,6 +40,5 @@ def raw_env(num_players=2, game_version="classic", **kwargs):
         **kwargs,
     )
 
-print('from my system!!')
 env = base_env_wrapper_fn(raw_env)
 parallel_env = parallel_wrapper_fn(env)
