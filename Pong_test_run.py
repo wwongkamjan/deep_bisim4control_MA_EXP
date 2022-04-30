@@ -1,6 +1,6 @@
 from stable_baselines3.ppo import CnnPolicy
 from stable_baselines3 import PPO
-from pettingzoo.atari import pong_v3
+from pettingzoo.atari import pong_v2
 import supersuit as ss
 import PIL
 env = pong_v3.parallel_env(num_players=2)
