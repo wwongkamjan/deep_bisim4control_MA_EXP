@@ -242,11 +242,11 @@ def main():
     utils.set_seed_everywhere(args.seed)
 
     
-    env = pong_v2.env(num_players=2, resource_files=args.resource_files, img_source=args.img_source)
+    env = pong_v2.env(num_players=2, resource_files=args.resource_files, img_source=args.img_source, total_frames=args.total_frames, seed=args.seed)
 
     env.seed(args.seed)
 
-    eval_env = pong_v2.env(num_players=2, resource_files=args.resource_files, img_source=args.img_source)
+    eval_env = pong_v2.env(num_players=2, resource_files=args.resource_files, img_source=args.img_source, total_frames=args.total_frames, seed=args.seed)
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):

@@ -33,6 +33,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         num_players,
         resource_files,
         img_source,
+        total_frames,
         mode_num=None,
         seed=None,
         obs_type="rgb_image",
