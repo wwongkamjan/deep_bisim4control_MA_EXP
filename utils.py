@@ -12,7 +12,6 @@ import os
 from collections import deque
 import random
 from pettingzoo.utils.env import AECEnv, ParallelEnv
-from pettingzoo.utils.conversions import aec_to_parallel, parallel_to_aec
 
 
 class eval_mode(object):
