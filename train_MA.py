@@ -251,7 +251,8 @@ def main():
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
-        env = utils.FrameStack(env, k=args.frame_stack)
+        env = ss.frame_stack_v1(env, args.frame_stack)
+        # env = utils.FrameStack(env, k=args.frame_stack)
         eval_env = utils.FrameStack(eval_env, k=args.frame_stack)
 
     utils.make_dir(args.work_dir)
