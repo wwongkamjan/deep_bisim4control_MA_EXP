@@ -22,7 +22,7 @@ from video import VideoRecorder
 from agent.baseline_agent import BaselineAgent
 from agent.bisim_agent import BisimAgent
 from agent.deepmdp_agent import DeepMDPAgent
-
+import supersuit as ss
 
 
 def parse_args():
