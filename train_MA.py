@@ -13,7 +13,6 @@ import time
 import json
 import dmc2gym
 from pettingzoo.atari import pong_v2
-import supersuit as ss
 
 
 import utils
@@ -252,8 +251,8 @@ def main():
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
-        env = ss.frame_stack_v1(env, args.frame_stack)
-        eval_env = ss.frame_stack_v1(eval_env, args.frame_stack)
+        env = utils.FrameStack(env, k=args.frame_stack)
+        eval_env = utils.FrameStack(eval_env, k=args.frame_stack)
 
     utils.make_dir(args.work_dir)
     video_dir = utils.make_dir(os.path.join(args.work_dir, 'video'))
