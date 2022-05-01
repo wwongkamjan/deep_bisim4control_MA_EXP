@@ -242,11 +242,11 @@ def main():
     utils.set_seed_everywhere(args.seed)
 
     
-    env = pong_v2.env(num_players=2)
+    env = pong_v2.env(num_players=2, resource_files=args.resource_files, image_source=args.image_source)
 
     env.seed(args.seed)
 
-    eval_env = pong_v2.env(num_players=2)
+    eval_env = pong_v2.env(num_players=2, resource_files=args.resource_files, image_source=args.image_source)
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
@@ -288,11 +288,8 @@ def main():
 
     episode, episode_reward, done = 0, 0, True
     start_time = time.time()
-    for step in range(args.num_train_steps):
+    for step in env.agent_iter(max_iter=args.num_train_steps):
         if done:
-            if args.decoder_type == 'inverse':
-                for i in range(1, args.k):  # fill k_obs with 0s if episode is done
-                    replay_buffer.k_obses[replay_buffer.idx - i] = 0
             if step > 0:
                 L.log('train/duration', time.time() - start_time, step)
                 start_time = time.time()
@@ -318,6 +315,8 @@ def main():
 
             L.log('train/episode', episode, step)
 
+
+        obs, reward, done, _ = env.last()
         # sample action for data collection
         if step < args.init_steps:
             action = env.action_space.sample()

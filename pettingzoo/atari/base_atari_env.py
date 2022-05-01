@@ -1,5 +1,6 @@
 from pathlib import Path
-
+import glob
+import os
 import gym
 import multi_agent_ale_py
 import numpy as np
@@ -7,10 +8,9 @@ from gym import spaces
 from gym.utils import EzPickle, seeding
 
 from pettingzoo import AECEnv
-from pettingzoo.utils import agent_selector, wrappers
+from pettingzoo.utils import agent_selector, wrappers, natural_imgsource
 from pettingzoo.utils.conversions import from_parallel_wrapper, parallel_wrapper_fn
 from pettingzoo.utils.env import ParallelEnv
-
 
 def base_env_wrapper_fn(raw_env_fn):
     def env_fn(**kwargs):
@@ -31,6 +31,8 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         self,
         game,
         num_players,
+        resource_files,
+        img_source,
         mode_num=None,
         seed=None,
         obs_type="rgb_image",
@@ -38,6 +40,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         env_name=None,
         max_cycles=100000,
         auto_rom_install_path=None,
+        
     ):
         """Frameskip should be either a tuple (indicating a random range to
         choose from, with the top value exclude), or an int."""
@@ -146,10 +149,30 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         self.observation_spaces = {
             agent: observation_space for agent in self.possible_agents
         }
+        
+
+                # background
+        if img_source is not None:
+            shape2d = (84, 84)
+            if img_source == "color":
+                self._bg_source = natural_imgsource.RandomColorSource(shape2d)
+            elif img_source == "noise":
+                self._bg_source = natural_imgsource.NoiseSource(shape2d)
+            else:
+                files = glob.glob(os.path.expanduser(resource_files))
+                assert len(files), "Pattern {} does not match any files".format(
+                    resource_files
+                )
+                if img_source == "images":
+                    self._bg_source = natural_imgsource.RandomImageSource(shape2d, files, grayscale=True, total_frames=total_frames)
+                elif img_source == "video":
+                    self._bg_source = natural_imgsource.RandomVideoSource(shape2d, files, grayscale=True, total_frames=total_frames)
+                else:
+                    raise Exception("img_source %s not defined." % img_source)
+
 
         self._screen = None
         self.seed(seed)
-        print('from my system!!')
 
     def seed(self, seed=None):
         if seed is None:
@@ -168,14 +191,19 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         return {agent: obs for agent in self.agents}
 
     def _observe(self):
+        obs = None
         if self.obs_type == "ram":
-            bytes = self.ale.getRAM()
-            return bytes
+            obs = self.ale.getRAM()
         elif self.obs_type == "rgb_image":
-            return self.ale.getScreenRGB()
+            obs = self.ale.getScreenRGB()
         elif self.obs_type == "grayscale_image":
-            return self.ale.getScreenGrayscale()
-
+            obs = self.ale.getScreenGrayscale()
+        mask = np.logical_and((obs[:, :, 2] > obs[:, :, 1]), (obs[:, :, 2] > obs[:, :, 0]))  # hardcoded for dmc
+        bg = self._bg_source.get_image()
+                
+        obs[mask] = bg[mask]
+        obs = obs.transpose(2, 0, 1).copy()
+        return obs
     def step(self, action_dict):
         actions = np.zeros(self.max_num_agents, dtype=np.int32)
         self.agents = [agent for agent in self.agents if not self.dones[agent]]
