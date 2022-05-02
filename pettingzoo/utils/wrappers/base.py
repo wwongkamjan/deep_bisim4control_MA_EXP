@@ -82,7 +82,10 @@ class BaseWrapper(AECEnv):
         return self.env.render(mode)
 
     def reset(self, seed=None):
-        self.env.reset(seed=seed)
+        if seed:
+            self.env.reset(seed=seed)
+        else:
+            self.env.reset()
 
         self.agent_selection = self.env.agent_selection
         self.rewards = self.env.rewards
