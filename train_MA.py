@@ -301,7 +301,8 @@ def main():
     episode, episode_reward, done = 0, 0, True
     start_time = time.time()
     env.reset()
-    for step in env.agent_iter(max_iter=args.num_train_steps):
+    for step in env.agent_iter(max_iter=2*args.num_train_steps):
+        print(step)
         if done:
             if step > 0:
                 L.log('train/duration', time.time() - start_time, step)
