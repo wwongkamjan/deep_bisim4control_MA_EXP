@@ -301,8 +301,10 @@ def main():
     episode, episode_reward, done = 0, 0, True
     start_time = time.time()
     env.reset()
-    for step in env.agent_iter(max_iter=2*args.num_train_steps):
-        print(step)
+    step=0
+    for agent in env.agent_iter(max_iter=2*args.num_train_steps):
+        if step>args.num_train_steps:
+            break
         if done:
             if step > 0:
                 L.log('train/duration', time.time() - start_time, step)
@@ -358,6 +360,7 @@ def main():
 
         obs = next_obs
         episode_step += 1
+        step+=1
 
 
 def collect_data(env, agent, num_rollouts, path_length, checkpoint_path):
