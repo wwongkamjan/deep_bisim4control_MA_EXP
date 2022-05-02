@@ -117,7 +117,6 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         episode_reward = 0
         while not done:
             obs, reward, done, _ = env.last()
-            print('obs', obs)
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
 
@@ -251,10 +250,10 @@ def main():
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
-        env = ss.resize_v0(env, x_size=84, y_size=84)
+        env = ss.resize_v0(env, x_size=120, y_size=120)
         env = ss.frame_stack_v1(env, args.frame_stack)
         # env = utils.FrameStack(env, k=args.frame_stack)
-        eval_env = ss.resize_v0(eval_env, x_size=84, y_size=84)
+        eval_env = ss.resize_v0(env, x_size=120, y_size=120)
         eval_env = ss.frame_stack_v1(eval_env, args.frame_stack)
 
     utils.make_dir(args.work_dir)
