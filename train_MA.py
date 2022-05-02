@@ -278,10 +278,10 @@ def main():
         batch_size=args.batch_size,
         device=device
     )
-    print('shape:',env.action_space[env.possible_agents[0]])
+    print('shape:',env.action_spaces[env.possible_agents[0]])
     agent = make_agent(
-        obs_shape=env.env.env.observation_space[env.possible_agents[0]].shape,
-        action_shape=env.env.env.eaction_space[env.possible_agents[0]].shape,
+        obs_shape=env.env.env.observation_spaces[env.possible_agents[0]].shape,
+        action_shape=env.env.env.eaction_spaces[env.possible_agents[0]].shape,
         args=args,
         device=device
     )
