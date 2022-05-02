@@ -202,6 +202,9 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
     def _observe(self):
         obs = None
+        (screen_width, screen_height) = self.ale.getScreenDims()
+        print('screen_width', screen_width)
+        print('screen_height', screen_height)
         if self.obs_type == "ram":
             obs = self.ale.getRAM()
         elif self.obs_type == "rgb_image":
