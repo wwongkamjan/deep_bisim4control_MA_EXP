@@ -342,7 +342,7 @@ def main():
 
         # sample action for data collection
         if step < args.init_steps:
-            action = env.action_space.sample()
+            action = env.action_spaces[env.possible_agents[0]].sample()
         else:
             with utils.eval_mode(agent):
                 action = agent.sample_action(obs)
