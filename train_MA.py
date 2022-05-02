@@ -335,8 +335,9 @@ def main():
 
         last_obs = obs
         obs, reward, done, _ = env.last()
-        replay_buffer.add(last_obs, action, curr_reward, reward, obs, done_bool)
-        np.copyto(replay_buffer.k_obses[replay_buffer.idx - args.k], obs)
+        if step > 0:
+            replay_buffer.add(last_obs, action, curr_reward, reward, obs, done_bool)
+            np.copyto(replay_buffer.k_obses[replay_buffer.idx - args.k], obs)
 
 
         # sample action for data collection
