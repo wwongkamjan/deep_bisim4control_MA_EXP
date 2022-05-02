@@ -268,7 +268,7 @@ def main():
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    print(env.possible_agents)
+    print(env.possible_agents[0])
     assert env.action_space().low.min() >= -1
     assert env.action_space().high.max() <= 1
 
