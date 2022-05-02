@@ -12,7 +12,6 @@ from pettingzoo.utils import agent_selector, wrappers, natural_imgsource
 from pettingzoo.utils.conversions import parallel_to_aec_wrapper, parallel_wrapper_fn
 from pettingzoo.utils.env import ParallelEnv
 
-
 def base_env_wrapper_fn(raw_env_fn):
     def env_fn(**kwargs):
         env = raw_env_fn(**kwargs)
@@ -38,10 +37,11 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         mode_num=None,
         seed=None,
         obs_type="rgb_image",
-        full_action_space=False,
+        full_action_space=True,
         env_name=None,
         max_cycles=100000,
         auto_rom_install_path=None,
+        
     ):
         """Frameskip should be either a tuple (indicating a random range to
         choose from, with the top value exclude), or an int."""
@@ -69,11 +69,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         self.max_cycles = max_cycles
         if env_name is None:
             env_name = "custom_" + game
-        self.metadata = {
-            "render_modes": ["human", "rgb_array"],
-            "name": env_name,
-            "render_fps": 60,
-        }
+        self.metadata = {"render.modes": ["human", "rgb_array"], "name": env_name}
 
         multi_agent_ale_py.ALEInterface.setLoggerMode("error")
         self.ale = multi_agent_ale_py.ALEInterface()
@@ -97,7 +93,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
         if not final.exists():
             raise OSError(
-                f"rom {game} is not installed. Please install roms using AutoROM tool (https://github.com/Farama-Foundation/AutoROM) "
+                f"rom {game} is not installed. Please install roms using AutoROM tool (https://github.com/PettingZoo-Team/AutoROM) "
                 "or specify and double-check the path to your Atari rom using the `rom_path` argument."
             )
 
@@ -154,8 +150,9 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         self.observation_spaces = {
             agent: observation_space for agent in self.possible_agents
         }
+        
 
-        # background
+                # background
         if img_source is not None:
             shape2d = (84, 84)
             if img_source == "color":
@@ -173,6 +170,8 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
                     self._bg_source = natural_imgsource.RandomVideoSource(shape2d, files, grayscale=True, total_frames=total_frames)
                 else:
                     raise Exception("img_source %s not defined." % img_source)
+
+
         self._screen = None
         self.seed(seed)
 
@@ -183,9 +182,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         self.ale.loadROM(self.rom_path)
         self.ale.setMode(self.mode)
 
-    def reset(self, seed=None):
-        if seed is not None:
-            self.seed(seed=seed)
+    def reset(self):
         self.ale.reset_game()
         self.agents = self.possible_agents[:]
         self.dones = {agent: False for agent in self.possible_agents}
@@ -193,12 +190,6 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
         obs = self._observe()
         return {agent: obs for agent in self.agents}
-
-    def observation_space(self, agent):
-        return self.observation_spaces[agent]
-
-    def action_space(self, agent):
-        return self.action_spaces[agent]
 
     def _observe(self):
         obs = None
@@ -217,6 +208,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         
     def step(self, action_dict):
         actions = np.zeros(self.max_num_agents, dtype=np.int32)
+        self.agents = [agent for agent in self.agents if not self.dones[agent]]
         for i, agent in enumerate(self.possible_agents):
             if agent in action_dict:
                 actions[i] = action_dict[agent]
@@ -234,6 +226,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
                 for agent, life in zip(self.possible_agents, lives)
                 if agent in self.agents
             }
+            self.dones = dones
 
         obs = self._observe()
         observations = {agent: obs for agent in self.agents}
@@ -243,7 +236,6 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
             if agent in self.agents
         }
         infos = {agent: {} for agent in self.possible_agents if agent in self.agents}
-        self.agents = [agent for agent in self.agents if not dones[agent]]
         return observations, rewards, dones, infos
 
     def render(self, mode="human"):
@@ -252,6 +244,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         if mode == "human":
             import os
 
+            os.environ["PYGAME_HIDE_SUPPORT_PROMPT"] = "hide"
             import pygame
 
             zoom_factor = 4
@@ -261,7 +254,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
                     (screen_width * zoom_factor, screen_height * zoom_factor)
                 )
 
-            myImage = pygame.image.frombuffer(
+            myImage = pygame.image.fromstring(
                 image.tobytes(), image.shape[:2][::-1], "RGB"
             )
 
