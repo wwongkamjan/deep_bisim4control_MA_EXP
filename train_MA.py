@@ -117,6 +117,9 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         done = False
         episode_reward = 0
         while not done:
+            last_obs = obs
+            last_reward = reward
+            obs, reward, done, _ = env.last()
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
 
@@ -126,11 +129,12 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                     values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
                     embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
 
-            obs, reward, done, _ = env.step(action)
+            env.step(action)
             
+            episode_reward += last_reward
 
             video.record(env)
-            episode_reward += reward
+            
 
         # metrics:
         if do_carla_metrics:
@@ -329,9 +333,12 @@ def main():
 
             L.log('train/episode', episode, step)
 
-        print(obs)
+        last_obs = obs
         obs, reward, done, _ = env.last()
-        print(obs)
+        replay_buffer.add(last_obs, action, curr_reward, reward, obs, done_bool)
+        np.copyto(replay_buffer.k_obses[replay_buffer.idx - args.k], obs)
+
+
         # sample action for data collection
         if step < args.init_steps:
             action = env.action_space.sample()
@@ -346,19 +353,13 @@ def main():
                 agent.update(replay_buffer, L, step)
 
         curr_reward = reward
-        next_obs, reward, done, _ = env.step(action)
-        print(next_obs)
+        env.step(action)
 
         # allow infinit bootstrap
         done_bool = 0 if episode_step + 1 == env._max_episode_steps else float(
             done
         )
         episode_reward += reward
-
-        replay_buffer.add(obs, action, curr_reward, reward, next_obs, done_bool)
-        np.copyto(replay_buffer.k_obses[replay_buffer.idx - args.k], next_obs)
-
-        obs = next_obs
         episode_step += 1
         step+=1
 
