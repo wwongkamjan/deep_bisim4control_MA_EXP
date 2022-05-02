@@ -302,7 +302,7 @@ def main():
     start_time = time.time()
     env.reset()
     step=0
-    for agent in env.agent_iter(max_iter=2*args.num_train_steps):
+    for agent_iter in env.agent_iter(max_iter=2*args.num_train_steps):
         if step>args.num_train_steps:
             break
         if done:
