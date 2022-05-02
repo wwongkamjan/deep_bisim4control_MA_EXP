@@ -211,12 +211,12 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
             obs = self.ale.getScreenRGB()
         elif self.obs_type == "grayscale_image":
             obs = self.ale.getScreenGrayscale()
-        obs = cv2.resize(obs, dim)
-        mask = np.logical_and((obs[:, :, 2] > obs[:, :, 1]), (obs[:, :, 2] > obs[:, :, 0]))  # hardcoded for dmc
-        bg = self._bg_source.get_image()
+        # obs = cv2.resize(obs, dim)
+        # mask = np.logical_and((obs[:, :, 2] > obs[:, :, 1]), (obs[:, :, 2] > obs[:, :, 0]))  # hardcoded for dmc
+        # bg = self._bg_source.get_image()
                 
-        obs[mask] = bg[mask]
-        obs = obs.transpose(2, 0, 1).copy()
+        # obs[mask] = bg[mask]
+        # obs = obs.transpose(2, 0, 1).copy()
         return obs
         
     def step(self, action_dict):
