@@ -329,8 +329,9 @@ def main():
 
             L.log('train/episode', episode, step)
 
-
+        print(obs)
         obs, reward, done, _ = env.last()
+        print(obs)
         # sample action for data collection
         if step < args.init_steps:
             action = env.action_space.sample()
@@ -346,6 +347,7 @@ def main():
 
         curr_reward = reward
         next_obs, reward, done, _ = env.step(action)
+        print(next_obs)
 
         # allow infinit bootstrap
         done_bool = 0 if episode_step + 1 == env._max_episode_steps else float(
