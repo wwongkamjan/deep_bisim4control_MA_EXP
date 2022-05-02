@@ -296,7 +296,7 @@ def main():
 
     L = Logger(args.work_dir, use_tb=args.save_tb)
 
-    episode, episode_reward, done = 0, 0, True
+    episode, episode_reward, done = 0, 0, False
     start_time = time.time()
     env.reset()
     step=0
