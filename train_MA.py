@@ -280,8 +280,8 @@ def main():
     )
     print('shape:',env.action_space[env.possible_agents[0]])
     agent = make_agent(
-        obs_shape=env.observation_space[env.possible_agents[0]].shape,
-        action_shape=env.action_space[env.possible_agents[0]].shape,
+        obs_shape=env.env.observation_space[env.possible_agents[0]].shape,
+        action_shape=env.env.action_space[env.possible_agents[0]].shape,
         args=args,
         device=device
     )
