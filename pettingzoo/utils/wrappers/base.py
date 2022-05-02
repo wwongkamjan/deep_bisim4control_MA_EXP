@@ -1,3 +1,5 @@
+import warnings
+
 from pettingzoo.utils.env import AECEnv
 
 
@@ -11,9 +13,11 @@ class BaseWrapper(AECEnv):
         super().__init__()
         self.env = env
 
-        self.observation_spaces = self.env.observation_spaces
-        self.action_spaces = self.env.action_spaces
-        self.possible_agents = self.env.possible_agents
+        try:
+            self.possible_agents = self.env.possible_agents
+        except AttributeError:
+            pass
+
         self.metadata = self.env.metadata
 
         # we don't want these defined as we don't want them used before they are gotten
@@ -36,11 +40,40 @@ class BaseWrapper(AECEnv):
             pass
 
     @property
+    def observation_spaces(self):
+        warnings.warn(
+            "The `observation_spaces` dictionary is deprecated. Use the `observation_space` function instead."
+        )
+        try:
+            return {
+                agent: self.observation_space(agent) for agent in self.possible_agents
+            }
+        except AttributeError:
+            raise AttributeError(
+                "The base environment does not have an `observation_spaces` dict attribute. Use the environment's `observation_space` method instead"
+            )
+
+    @property
+    def action_spaces(self):
+        warnings.warn(
+            "The `action_spaces` dictionary is deprecated. Use the `action_space` function instead."
+        )
+        try:
+            return {agent: self.action_space(agent) for agent in self.possible_agents}
+        except AttributeError:
+            raise AttributeError(
+                "The base environment does not have an action_spaces dict attribute. Use the environment's `action_space` method instead"
+            )
+
+    def observation_space(self, agent):
+        return self.env.observation_space(agent)
+
+    def action_space(self, agent):
+        return self.env.action_space(agent)
+
+    @property
     def unwrapped(self):
         return self.env.unwrapped
-
-    def seed(self, seed=None):
-        self.env.seed(seed)
 
     def close(self):
         self.env.close()
@@ -48,8 +81,8 @@ class BaseWrapper(AECEnv):
     def render(self, mode="human"):
         return self.env.render(mode)
 
-    def reset(self):
-        self.env.reset()
+    def reset(self, seed=None):
+        self.env.reset(seed=seed)
 
         self.agent_selection = self.env.agent_selection
         self.rewards = self.env.rewards
