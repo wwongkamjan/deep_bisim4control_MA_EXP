@@ -66,10 +66,10 @@ class BaseWrapper(AECEnv):
             )
 
     def observation_space(self, agent):
-        return self.env.observation_spaces(agent)
+        return self.env.observation_space(agent)
 
     def action_space(self, agent):
-        return self.env.action_spaces(agent)
+        return self.env.action_space(agent)
 
     @property
     def unwrapped(self):

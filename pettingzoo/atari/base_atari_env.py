@@ -9,7 +9,7 @@ from gym.utils import EzPickle, seeding
 
 from pettingzoo import AECEnv
 from pettingzoo.utils import agent_selector, wrappers, natural_imgsource
-from pettingzoo.utils.conversions import from_parallel_wrapper, parallel_wrapper_fn
+from pettingzoo.utils.conversions import from_parallel, parallel_wrapper_fn
 from pettingzoo.utils.env import ParallelEnv
 
 def base_env_wrapper_fn(raw_env_fn):
@@ -23,7 +23,7 @@ def base_env_wrapper_fn(raw_env_fn):
 
 
 def BaseAtariEnv(**kwargs):
-    return from_parallel_wrapper(ParallelAtariEnv(**kwargs))
+    return from_parallel(ParallelAtariEnv(**kwargs))
 
 
 class ParallelAtariEnv(ParallelEnv, EzPickle):
