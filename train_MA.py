@@ -268,9 +268,9 @@ def main():
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-    # the dmc2gym wrapper standardizes actions
-    assert env.action_space(0).low.min() >= -1
-    assert env.action_space(0).high.max() <= 1
+    print(env.possible_agents)
+    assert env.action_space().low.min() >= -1
+    assert env.action_space().high.max() <= 1
 
     replay_buffer = utils.ReplayBuffer(
         obs_shape=env.observation_space(0).shape,
