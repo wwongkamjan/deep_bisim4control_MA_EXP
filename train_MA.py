@@ -110,14 +110,14 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
     for i in range(num_episodes):
         # carla metrics:
         dist_driven_this_episode = 0.
-        
+
         obs = env.reset()
+        print('obs', obs)
         
         video.init(enabled=(i == 0))
         done = False
         episode_reward = 0
         while not done:
-            print('obs', obs)
             obs, reward, done, _ = env.last()
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
