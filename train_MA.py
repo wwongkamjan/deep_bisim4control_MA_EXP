@@ -238,10 +238,10 @@ def make_agent(obs_shape, action_shape, args, device):
         agent.critic.encoder.load_state_dict(encoder_dict)
 
     return agent
-    
+
 @property 
-def shape(self):
-    return (self.n,)
+def shape(any_arr):
+    return (any_arr.n,)
 
 def main():
     args = parse_args()
