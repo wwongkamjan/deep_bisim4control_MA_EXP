@@ -116,9 +116,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         video.init(enabled=(i == 0))
         done = False
         episode_reward = 0
-        env.reset()
         while not done:
-            obs, reward, done, info = env.last()
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
 
@@ -128,7 +126,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                     values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
                     embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
 
-            next_obs, reward, done, _ = env.step(action)
+            obs, reward, done, _ = env.step(action)
             
 
             video.record(env)
