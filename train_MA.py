@@ -303,6 +303,7 @@ def main():
 
     episode, episode_reward, done = 0, 0, True
     start_time = time.time()
+    env.reset()
     for step in env.agent_iter(max_iter=args.num_train_steps):
         if done:
             if step > 0:
