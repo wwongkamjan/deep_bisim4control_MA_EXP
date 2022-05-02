@@ -300,7 +300,7 @@ def main():
 
     L = Logger(args.work_dir, use_tb=args.save_tb)
 
-    episode, episode_reward, done = 0, 0, False
+    episode, episode_reward, done = 0, 0, True
     start_time = time.time()
     obs = env.reset()
     step=0
