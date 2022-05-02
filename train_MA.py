@@ -272,16 +272,16 @@ def main():
     # assert env.action_space(env.possible_agents[0]).high.max() <= 1
 
     replay_buffer = utils.ReplayBuffer(
-        obs_shape=env.observation_space(env.possible_agents[0]).shape,
-        action_shape=env.action_space(env.possible_agents[0]).shape,
+        obs_shape=env.observation_space[env.possible_agents[0]].shape,
+        action_shape=env.action_space[env.possible_agents[0]].shape,
         capacity=args.replay_buffer_capacity,
         batch_size=args.batch_size,
         device=device
     )
-    print('shape:',env.action_space(env.possible_agents[0]))
+    print('shape:',env.action_space[env.possible_agents[0]])
     agent = make_agent(
-        obs_shape=env.observation_space(env.possible_agents[0]).shape,
-        action_shape=env.action_space(env.possible_agents[0]).shape,
+        obs_shape=env.observation_space[env.possible_agents[0]].shape,
+        action_shape=env.action_space[env.possible_agents[0]].shape,
         args=args,
         device=device
     )
