@@ -3,7 +3,7 @@ import numpy as np
 import gym
 from gym.spaces import Box, Discrete
 from pettingzoo.utils.wrappers import OrderEnforcingWrapper as PettingzooWrap
-from pettingzoo.utils import BaseParallelWraper
+from pettingzoo.utils.wrappers import BaseParallelWraper
 
 class BaseModifier:
     def __init__(self):

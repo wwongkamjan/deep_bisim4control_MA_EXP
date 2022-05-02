@@ -11,5 +11,5 @@ from .wrappers import (
     ClipOutOfBoundsWrapper,
     OrderEnforcingWrapper,
     TerminateIllegalWrapper,
-    frame_stack_v1,
+    BaseParallelWraper,
 )

@@ -22,7 +22,8 @@ from video import VideoRecorder
 from agent.baseline_agent import BaselineAgent
 from agent.bisim_agent import BisimAgent
 from agent.deepmdp_agent import DeepMDPAgent
-from pettingzoo.utils.wrappers import frame_stack_v1
+import supersuit as ss
+# from pettingzoo.utils.wrappers import frame_stack_v1
 
 
 def parse_args():
@@ -251,9 +252,9 @@ def main():
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
-        env = frame_stack_v1(env, args.frame_stack)
+        env = ss.frame_stack_v1(env, args.frame_stack)
         # env = utils.FrameStack(env, k=args.frame_stack)
-        eval_env = frame_stack_v1(eval_env, args.frame_stack)
+        eval_env = ss.frame_stack_v1(eval_env, args.frame_stack)
 
     utils.make_dir(args.work_dir)
     video_dir = utils.make_dir(os.path.join(args.work_dir, 'video'))
