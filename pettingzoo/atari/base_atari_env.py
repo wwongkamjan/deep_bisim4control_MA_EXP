@@ -209,7 +209,6 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
             obs = self.ale.getRAM()
         elif self.obs_type == "rgb_image":
             obs = self.ale.getScreenRGB()
-            print('rgb', obs)
         elif self.obs_type == "grayscale_image":
             obs = self.ale.getScreenGrayscale()
         # obs = cv2.resize(obs, dim)
