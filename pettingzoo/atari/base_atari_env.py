@@ -11,6 +11,7 @@ from pettingzoo import AECEnv
 from pettingzoo.utils import agent_selector, wrappers, natural_imgsource
 from pettingzoo.utils.conversions import parallel_to_aec_wrapper, parallel_wrapper_fn
 from pettingzoo.utils.env import ParallelEnv
+import cv2
 
 
 def base_env_wrapper_fn(raw_env_fn):
@@ -202,15 +203,15 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
     def _observe(self):
         obs = None
-        (screen_width, screen_height) = self.ale.getScreenDims()
-        print('screen_width', screen_width)
-        print('screen_height', screen_height)
+        dim = (84,84)
+
         if self.obs_type == "ram":
             obs = self.ale.getRAM()
         elif self.obs_type == "rgb_image":
             obs = self.ale.getScreenRGB()
         elif self.obs_type == "grayscale_image":
             obs = self.ale.getScreenGrayscale()
+        obs = cv2.resize(obs, dim)
         mask = np.logical_and((obs[:, :, 2] > obs[:, :, 1]), (obs[:, :, 2] > obs[:, :, 0]))  # hardcoded for dmc
         bg = self._bg_source.get_image()
                 
