@@ -117,6 +117,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         done = False
         episode_reward = 0
         while not done:
+            print('obs', obs)
             obs, reward, done, _ = env.last()
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
