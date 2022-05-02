@@ -113,6 +113,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         dist_driven_this_episode = 0.
 
         obs = env.reset()
+        
         video.init(enabled=(i == 0))
         done = False
         episode_reward = 0
@@ -130,7 +131,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
 
             env.step(action)
             
-            episode_reward += reward
+            episode_reward = reward
 
             video.record(env)
             
