@@ -129,7 +129,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
 
             env.step(action)
             
-            episode_reward += last_reward
+            episode_reward += reward
 
             video.record(env)
             
