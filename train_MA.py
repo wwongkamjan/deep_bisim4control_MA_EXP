@@ -111,7 +111,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         # carla metrics:
         dist_driven_this_episode = 0.
 
-        obs = env.reset()
+        obs = env.env.reset()
         print('obs', obs)
         
         video.init(enabled=(i == 0))
