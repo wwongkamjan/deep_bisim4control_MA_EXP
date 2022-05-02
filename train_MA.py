@@ -278,7 +278,7 @@ def main():
         batch_size=args.batch_size,
         device=device
     )
-
+    print('shapre:',env.action_space(env.possible_agents[0]).shape)
     agent = make_agent(
         obs_shape=env.observation_space(env.possible_agents[0]).shape,
         action_shape=env.action_space(env.possible_agents[0]).shape,
