@@ -30,7 +30,7 @@ class PixelEncoder(nn.Module):
         for i in range(num_layers - 1):
             self.convs.append(nn.Conv2d(num_filters, num_filters, 2, stride=1))
 
-        out_dim = {2: 39, 4: 35, 6: 31}[num_layers]
+        out_dim = {2: 39, 4: 35, 6: 31}[num_layers*2]
         self.fc = nn.Linear(num_filters * out_dim * out_dim, self.feature_dim)
         self.ln = nn.LayerNorm(self.feature_dim)
 
