@@ -117,6 +117,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         episode_reward = 0
         while not done:
             obs, reward, done, _ = env.last()
+            print('obs', obs)
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
 
@@ -329,7 +330,7 @@ def main():
             reward = 0
 
             L.log('train/episode', episode, step)
-            
+
         if step > 0:
             last_obs = obs
         obs, reward, done, _ = env.last()
