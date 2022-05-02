@@ -111,9 +111,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         # carla metrics:
         dist_driven_this_episode = 0.
 
-        obs = env.env.reset()
-        print('obs', obs)
-        
+        env.reset()
         video.init(enabled=(i == 0))
         done = False
         episode_reward = 0
@@ -301,7 +299,7 @@ def main():
 
     episode, episode_reward, done = 0, 0, True
     start_time = time.time()
-    obs = env.reset()
+    env.reset()
     step=0
     for agent_iter in env.agent_iter(max_iter=2*args.num_train_steps):
         if step>args.num_train_steps:
@@ -323,7 +321,7 @@ def main():
 
             L.log('train/episode_reward', episode_reward, step)
 
-            obs = env.reset()
+            env.reset()
             done = False
             episode_reward = 0
             episode_step = 0
@@ -331,8 +329,9 @@ def main():
             reward = 0
 
             L.log('train/episode', episode, step)
-
-        last_obs = obs
+            
+        if step > 0:
+            last_obs = obs
         obs, reward, done, _ = env.last()
         if step > 0:
             replay_buffer.add(last_obs, action, curr_reward, reward, obs, done_bool)
