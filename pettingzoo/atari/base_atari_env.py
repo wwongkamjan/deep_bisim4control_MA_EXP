@@ -193,6 +193,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         self.frame = 0
 
         obs = self._observe()
+        print(obs)
         return {agent: obs for agent in self.agents}
 
     def observation_space(self, agent):
@@ -217,7 +218,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
                 
         # obs[mask] = bg[mask]
         # obs = obs.transpose(2, 0, 1).copy()
-        print(obs)
+        # print(obs)
         return obs
         
     def step(self, action_dict):
