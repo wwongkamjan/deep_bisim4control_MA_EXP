@@ -107,7 +107,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
     obses = []
     values = []
     embeddings = []
-    print(env.possible_agents)
+    print('poss',env.possible_agents)
     for i in range(num_episodes):
         # carla metrics:
         dist_driven_this_episode = 0.
