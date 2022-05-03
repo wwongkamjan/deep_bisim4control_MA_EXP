@@ -272,9 +272,9 @@ def main():
     # assert env.action_space(env.possible_agents[0]).low.min() >= -1
     # assert env.action_space(env.possible_agents[0]).high.max() <= 1
 
-    state_dim = env.observation_spaces[env.possible_agents[0]].shape[0]
+    state_dim = env.observation_spaces[env.possible_agents[0]].shape
     if len(env.action_spaces[env.possible_agents[0]].shape) > 1:
-        action_dim = env.action_spaces[env.possible_agents[0]].shape[0]
+        action_dim = env.action_spaces[env.possible_agents[0]].shape
     else:
         action_dim = env.action_spaces[env.possible_agents[0]].n
 
