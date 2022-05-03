@@ -123,6 +123,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                 
                 with utils.eval_mode(agent):
                     actions[str_agent] = agent.select_action(obs)
+                    print(actions)
 
                 if embed_viz_dir:
                     obses.append(obs)
@@ -130,7 +131,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                         values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
                         embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
                 episode_reward[str_agent] += reward
-
+            print(actions)
             env.step(actions)
         
             video.record(env)
@@ -236,10 +237,6 @@ def make_agent(obs_shape, action_shape, args, device):
 
     return agent
 
-@property 
-def shape(any_arr):
-    return (any_arr.n,)
-
 def main():
     args = parse_args()
     utils.set_seed_everywhere(args.seed)
@@ -276,7 +273,7 @@ def main():
     if len(env.action_spaces[env.possible_agents[0]].shape) > 1:
         action_dim = env.action_spaces[env.possible_agents[0]].shape
     else:
-        action_dim = (1, )
+        action_dim = env.action_spaces[env.possible_agents[0]].n
 
 
     replay_buffer = utils.ReplayBuffer(
