@@ -299,7 +299,7 @@ def main():
     start_time = time.time()
     env.reset()
     step=0
-    for i in range (args.num_train_steps):
+    for step in range (args.num_train_steps):
         if done:
             if step > 0:
                 L.log('train/duration', time.time() - start_time, step)
@@ -350,12 +350,10 @@ def main():
         curr_reward = reward
         env.step(action)
 
-        if step % 1000:
+        if step % 1000==0:
             done=True
         episode_reward += reward
         episode_step += 1
-        step+=1
-
 
 def collect_data(env, agent, num_rollouts, path_length, checkpoint_path):
     rollouts = []
