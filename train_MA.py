@@ -247,10 +247,14 @@ def main():
 
     # stack several consecutive frames together
     if args.encoder_type.startswith('pixel'):
+        env = ss.frame_skip_v0(env, 4)
+        env = ss.resize_v0(env, 84, 84)
         env = ss.frame_stack_v1(env, args.frame_stack)
         # env = utils.FrameStack(env, k=args.frame_stack)
+        eval_env = ss.frame_skip_v0(eval_env, 4)
+        eval_env = ss.resize_v0(eval_env, 84, 84)
         eval_env = ss.frame_stack_v1(eval_env, args.frame_stack)
-
+        
     utils.make_dir(args.work_dir)
     video_dir = utils.make_dir(os.path.join(args.work_dir, 'video'))
     model_dir = utils.make_dir(os.path.join(args.work_dir, 'model'))
