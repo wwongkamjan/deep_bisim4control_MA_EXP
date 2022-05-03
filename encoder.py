@@ -28,7 +28,7 @@ class PixelEncoder(nn.Module):
             [nn.Conv2d(obs_shape[0], num_filters, 3, stride=2)]
         )
         for i in range(num_layers - 1):
-            self.convs.append(nn.Conv2d(num_filters, num_filters, 3, stride=1))
+            self.convs.append(nn.Conv2d(num_filters, num_filters, 2, stride=1))
 
         out_dim = {2: 39, 4: 35, 6: 31}[num_layers]
         self.fc = nn.Linear(num_filters * 154, self.feature_dim)
