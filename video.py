@@ -41,7 +41,7 @@ class VideoRecorder(object):
                 mask_color[:, :, 0] = 146
                 mask_color[:, :, 1] = 73
                 mask_color[:, :, 2] = 20
-                mask = frame[:, :, 0] == mask_color[:, :, 0] and frame[:, :, 1] == mask_color[:, :, 1] and frame[:, :, 2] == mask_color[:, :, 2] # hardcoded for pong
+                mask = np.logical_and((frame[:, :, 0] == mask_color[:, :, 0]), (frame[:, :, 1] == mask_color[:, :, 1]), (frame[:, :, 2] == mask_color[:, :, 2])) # hardcoded for pong
 
                 bg = self._bg_source.get_image()
                 # print('bg', bg.shape)
