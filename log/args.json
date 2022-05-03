@@ -35,7 +35,7 @@
     "init_temperature": 0.01,
     "k": 3,
     "load_encoder": null,
-    "num_eval_episodes": 20,
+    "num_eval_episodes": 5,
     "num_filters": 32,
     "num_layers": 4,
     "num_train_steps": 100000,
