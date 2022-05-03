@@ -222,7 +222,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
         
     def step(self, action_dict):
         actions = np.zeros(self.max_num_agents, dtype=np.int32)
-        print('in step print action dict', action_dict)
+        # print('in step print action dict', action_dict)
         for i, agent in enumerate(self.possible_agents):
             if agent in action_dict:
                 actions[i] = action_dict[agent]
