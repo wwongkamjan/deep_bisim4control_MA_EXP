@@ -276,7 +276,7 @@ def main():
     if len(env.action_spaces[env.possible_agents[0]].shape) > 1:
         action_dim = env.action_spaces[env.possible_agents[0]].shape
     else:
-        action_dim = env.action_spaces[env.possible_agents[0]].n
+        action_dim = (1, )
 
 
     replay_buffer = utils.ReplayBuffer(
