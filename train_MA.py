@@ -132,6 +132,8 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                         embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
                 episode_reward[str_agent] += reward
             print(actions)
+            actions = np.argmax(actions, axis=1)
+            print(actions)
             env.step(actions)
         
             video.record(env)
@@ -273,7 +275,7 @@ def main():
     if len(env.action_spaces[env.possible_agents[0]].shape) > 1:
         action_dim = env.action_spaces[env.possible_agents[0]].shape
     else:
-        action_dim = env.action_spaces[env.possible_agents[0]].n
+        action_dim = (env.action_spaces[env.possible_agents[0]].n, )
 
 
     replay_buffer = utils.ReplayBuffer(
