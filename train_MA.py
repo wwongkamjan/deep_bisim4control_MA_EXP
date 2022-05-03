@@ -350,7 +350,7 @@ def main():
         curr_reward = reward
         env.step(action)
 
-        if step % 1000==0:
+        if step % 250==0:
             done=True
         episode_reward += reward
         episode_step += 1
