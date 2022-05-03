@@ -120,6 +120,8 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
             with utils.eval_mode(agent):
                 action = agent.select_action(obs)
 
+                print('the action taking', action)
+
             if embed_viz_dir:
                 obses.append(obs)
                 with torch.no_grad():
@@ -277,7 +279,7 @@ def main():
     act_shape = act_space.shape
     if len(act_shape) < 1:
         act_shape = (act_space.n,)
-
+    print(act_shape)
     replay_buffer = utils.ReplayBuffer(
         obs_shape=obs_shape,
         action_shape=act_shape,
