@@ -275,7 +275,7 @@ def main():
     else:
         action_dim = (env.action_spaces[env.possible_agents[0]].n, )
 
-
+    print('action space', env.action_spaces[env.possible_agents[0]])
     replay_buffer = utils.ReplayBuffer(
         obs_shape=state_dim,
         action_shape=action_dim,
@@ -283,7 +283,6 @@ def main():
         batch_size=args.batch_size,
         device=device
     )
-    print('shape:',action_dim)
     agent = make_agent(
         obs_shape=state_dim,
         action_shape=action_dim,
