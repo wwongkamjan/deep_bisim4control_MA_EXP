@@ -19,7 +19,7 @@ class AssertOutOfBoundsWrapper(BaseWrapper):
     def step(self, action):
         assert (
             action is None and self.dones[self.agent_selection]
-        ) or self.action_space(self.agent_selection).contains(
+        ) or not self.action_space(self.agent_selection).contains(
             action
         ), "action is not in action space"
         super().step(action)
