@@ -158,7 +158,7 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
         # background
         if img_source is not None:
-            shape2d = (84, 84)
+            shape2d = (210, 160)
             if img_source == "color":
                 self._bg_source = natural_imgsource.RandomColorSource(shape2d)
             elif img_source == "noise":

@@ -35,10 +35,10 @@ class VideoRecorder(object):
                 mode='rgb_array',
             )
             if self._bg_source:
-                print('frame', frame.shape)
+                # print('frame', frame.shape)
                 mask = np.logical_and((frame[:, :, 2] > frame[:, :, 1]), (frame[:, :, 2] > frame[:, :, 0]))  # hardcoded for dmc
                 bg = self._bg_source.get_image()
-                print('bg', bg.shape)
+                # print('bg', bg.shape)
                 frame[mask] = bg[mask]
             self.frames.append(frame)
 
