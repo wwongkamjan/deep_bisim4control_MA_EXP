@@ -43,14 +43,14 @@ def parse_args():
     # train
     parser.add_argument('--agent', default='bisim', type=str, choices=['baseline', 'bisim', 'deepmdp'])
     parser.add_argument('--init_steps', default=1000, type=int)
-    parser.add_argument('--num_train_steps', default=10000, type=int)
+    parser.add_argument('--num_train_steps', default=100000, type=int)
     parser.add_argument('--batch_size', default=512, type=int)
     parser.add_argument('--hidden_dim', default=256, type=int)
     parser.add_argument('--k', default=3, type=int, help='number of steps for inverse model')
     parser.add_argument('--bisim_coef', default=0.5, type=float, help='coefficient for bisim terms')
     parser.add_argument('--load_encoder', default=None, type=str)
     # eval
-    parser.add_argument('--eval_freq', default=10, type=int)  # TODO: master had 10000
+    parser.add_argument('--eval_freq', default=5, type=int)  # TODO: master had 10000
     parser.add_argument('--num_eval_episodes', default=20, type=int)
     # critic
     parser.add_argument('--critic_lr', default=1e-3, type=float)
@@ -297,9 +297,7 @@ def main():
     start_time = time.time()
     env.reset()
     step=0
-    for agent_iter in env.agent_iter(max_iter=2*args.num_train_steps):
-        if step>args.num_train_steps:
-            break
+    for i in range (args.num_train_steps):
         if done:
             if step > 0:
                 L.log('train/duration', time.time() - start_time, step)
