@@ -51,7 +51,7 @@ def parse_args():
     parser.add_argument('--load_encoder', default=None, type=str)
     # eval
     parser.add_argument('--eval_freq', default=5, type=int)  # TODO: master had 10000
-    parser.add_argument('--num_eval_episodes', default=20, type=int)
+    parser.add_argument('--num_eval_episodes', default=5, type=int)
     # critic
     parser.add_argument('--critic_lr', default=1e-3, type=float)
     parser.add_argument('--critic_beta', default=0.9, type=float)
@@ -116,6 +116,8 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         episode_reward = 0
         done = False
         for agent_iter in env.agent_iter(10000):
+            if done:
+                break
             obs, reward, done, _ = env.last()
             
             with utils.eval_mode(agent):
