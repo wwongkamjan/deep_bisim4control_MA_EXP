@@ -256,7 +256,7 @@ def main():
     model_dir = utils.make_dir(os.path.join(args.work_dir, 'model'))
     buffer_dir = utils.make_dir(os.path.join(args.work_dir, 'buffer'))
 
-    video = VideoRecorder(video_dir if args.save_video else None, resource_files=args.resource_files)
+    video = VideoRecorder(video_dir if args.save_video else None, resource_files=args.resource_files, height=210, width=160)
 
     with open(os.path.join(args.work_dir, 'args.json'), 'w') as f:
         json.dump(vars(args), f, sort_keys=True, indent=4)
