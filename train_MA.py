@@ -43,7 +43,7 @@ def parse_args():
     # train
     parser.add_argument('--agent', default='bisim', type=str, choices=['baseline', 'bisim', 'deepmdp'])
     parser.add_argument('--init_steps', default=1000, type=int)
-    parser.add_argument('--num_train_steps', default=1000000, type=int)
+    parser.add_argument('--num_train_steps', default=10000, type=int)
     parser.add_argument('--batch_size', default=512, type=int)
     parser.add_argument('--hidden_dim', default=256, type=int)
     parser.add_argument('--k', default=3, type=int, help='number of steps for inverse model')
@@ -115,7 +115,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
         video.init(enabled=(i == 0))
         episode_reward = 0
         done = False
-        while not done:
+        for agent_iter in env.agent_iter(10000):
             obs, reward, done, _ = env.last()
             
             with utils.eval_mode(agent):
@@ -326,7 +326,7 @@ def main():
             last_obs = obs
         obs, reward, done, _ = env.last()
         if step > 0:
-            replay_buffer.add(last_obs, action, curr_reward, reward, obs, done_bool)
+            replay_buffer.add(last_obs, action, curr_reward, reward, obs, done)
             np.copyto(replay_buffer.k_obses[replay_buffer.idx - args.k], obs)
 
 
@@ -346,10 +346,7 @@ def main():
         curr_reward = reward
         env.step(action)
 
-        # allow infinit bootstrap
-        done_bool = 0 if episode_step + 1 == env._max_episode_steps else float(
-            done
-        )
+
         episode_reward += reward
         episode_step += 1
         step+=1
