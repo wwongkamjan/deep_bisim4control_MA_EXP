@@ -113,25 +113,26 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
 
         env.reset()
         video.init(enabled=(i == 0))
+        dones = {agent: False for agent in env.possible_agents}
+        episode_reward = {agent: 0 for agent in env.possible_agents}
         done = False
-        episode_reward = 0
         while not done:
-            obs, reward, done, _ = env.last()
-            with utils.eval_mode(agent):
-                action = agent.select_action(obs)
+            actions = {}
+            for str_agent in env.possible_agents:
+                obs, reward, done, _ = env.last()
+                
+                with utils.eval_mode(agent):
+                    actions[str_agent] = agent.select_action(obs)
 
-                print('the action taking', action)
+                if embed_viz_dir:
+                    obses.append(obs)
+                    with torch.no_grad():
+                        values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
+                        embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
+                episode_reward[str_agent] += reward
 
-            if embed_viz_dir:
-                obses.append(obs)
-                with torch.no_grad():
-                    values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
-                    embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
-
-            env.step(action)
-            
-            episode_reward = reward
-
+            env.step(actions)
+        
             video.record(env)
             
 
@@ -270,27 +271,25 @@ def main():
 
     # assert env.action_space(env.possible_agents[0]).low.min() >= -1
     # assert env.action_space(env.possible_agents[0]).high.max() <= 1
-    obs_space = env.observation_spaces[env.possible_agents[0]]
-    obs_shape = obs_space.shape
-    if len(obs_shape) < 1:
-        obs_shape= (obs_space.n,)
 
-    act_space = env.action_spaces[env.possible_agents[0]]
-    act_shape = act_space.shape
-    if len(act_shape) < 1:
-        act_shape = (act_space.n,)
-    print(act_shape)
+    state_dim = env.observation_space[env.possible_agents[0]].shape[0]
+    if len(env.action_space[env.possible_agents[0]].shape) > 1:
+        action_dim = env.action_space[env.possible_agents[0]].shape[0]
+    else:
+        action_dim = env.action_space[env.possible_agents[0]].n
+
+
     replay_buffer = utils.ReplayBuffer(
-        obs_shape=obs_shape,
-        action_shape=act_shape,
+        obs_shape=state_dim,
+        action_shape=action_dim,
         capacity=args.replay_buffer_capacity,
         batch_size=args.batch_size,
         device=device
     )
-    print('shape:',act_shape)
+    print('shape:',action_dim)
     agent = make_agent(
-        obs_shape=obs_shape,
-        action_shape=act_shape,
+        obs_shape=state_dim,
+        action_shape=action_dim,
         args=args,
         device=device
     )
