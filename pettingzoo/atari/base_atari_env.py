@@ -203,7 +203,6 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
 
     def _observe(self):
         obs = None
-        dim = (84,84)
 
         if self.obs_type == "ram":
             obs = self.ale.getRAM()
@@ -211,13 +210,11 @@ class ParallelAtariEnv(ParallelEnv, EzPickle):
             obs = self.ale.getScreenRGB()
         elif self.obs_type == "grayscale_image":
             obs = self.ale.getScreenGrayscale()
-        # obs = cv2.resize(obs, dim)
-        # mask = np.logical_and((obs[:, :, 2] > obs[:, :, 1]), (obs[:, :, 2] > obs[:, :, 0]))  # hardcoded for dmc
-        # bg = self._bg_source.get_image()
-                
-        # obs[mask] = bg[mask]
-        # obs = obs.transpose(2, 0, 1).copy()
-        # print(obs)
+        mask_color = np.empty(obs.shape)
+        mask_color[:, :, 0] = 144
+        mask_color[:, :, 1] = 72
+        mask_color[:, :, 2] = 17
+        mask = np.logical_and((obs[:, :, 0] == mask_color[:, :, 0]), (obs[:, :, 1] == mask_color[:, :, 1]), (obs[:, :, 2] == mask_color[:, :, 2])) # hardcoded for pong
         return obs
         
     def step(self, action_dict):

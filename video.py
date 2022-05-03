@@ -35,7 +35,6 @@ class VideoRecorder(object):
                 mode='rgb_array',
             )
             if self._bg_source:
-                print('frame', frame[100,80:])
                 # mask = np.logical_and((frame[:, :, 2] > frame[:, :, 1]), (frame[:, :, 2] > frame[:, :, 0]))  # hardcoded for dmc
                 mask_color = np.empty(frame.shape)
                 mask_color[:, :, 0] = 144
