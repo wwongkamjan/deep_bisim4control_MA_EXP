@@ -50,7 +50,7 @@ def parse_args():
     parser.add_argument('--bisim_coef', default=0.5, type=float, help='coefficient for bisim terms')
     parser.add_argument('--load_encoder', default=None, type=str)
     # eval
-    parser.add_argument('--eval_freq', default=5, type=int)  # TODO: master had 10000
+    parser.add_argument('--eval_freq', default=20, type=int)  # TODO: master had 10000
     parser.add_argument('--num_eval_episodes', default=5, type=int)
     # critic
     parser.add_argument('--critic_lr', default=1e-3, type=float)
