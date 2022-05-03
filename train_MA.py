@@ -122,8 +122,8 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                 obs, reward, done, _ = env.last()
                 
                 with utils.eval_mode(agent):
-                    actions[str_agent] = agent.select_action(obs)
-                    print(actions)
+                    actions[str_agent] = np.argmax(agent.select_action(obs), axis=1)
+
 
                 if embed_viz_dir:
                     obses.append(obs)
@@ -131,8 +131,6 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                         values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
                         embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
                 episode_reward[str_agent] += reward
-            print(actions)
-            actions = np.argmax(actions, axis=1)
             print(actions)
             env.step(actions)
         
