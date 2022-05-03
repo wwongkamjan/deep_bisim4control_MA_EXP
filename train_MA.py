@@ -113,26 +113,22 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
 
         env.reset()
         video.init(enabled=(i == 0))
-        dones = {agent: False for agent in env.possible_agents}
-        episode_reward = {agent: 0 for agent in env.possible_agents}
+        episode_reward = 0
         done = False
         while not done:
-            actions = {}
-            for str_agent in env.possible_agents:
-                obs, reward, done, _ = env.last()
-                
-                with utils.eval_mode(agent):
-                    actions[str_agent] = np.argmax(agent.select_action(obs))
+            obs, reward, done, _ = env.last()
+            
+            with utils.eval_mode(agent):
+                action = np.argmax(agent.select_action(obs))
 
 
-                if embed_viz_dir:
-                    obses.append(obs)
-                    with torch.no_grad():
-                        values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
-                        embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
-                episode_reward[str_agent] += reward
-            print(actions)
-            env.step(actions)
+            if embed_viz_dir:
+                obses.append(obs)
+                with torch.no_grad():
+                    values.append(min(agent.critic(torch.Tensor(obs).to(device).unsqueeze(0), torch.Tensor(action).to(device).unsqueeze(0))).item())
+                    embeddings.append(agent.critic.encoder(torch.Tensor(obs).unsqueeze(0).to(device)).cpu().detach().numpy())
+            episode_reward += reward
+            env.step(action)
         
             video.record(env)
             
