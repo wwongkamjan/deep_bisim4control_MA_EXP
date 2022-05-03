@@ -122,7 +122,7 @@ def evaluate(env, agent, video, num_episodes, L, step, device=None, embed_viz_di
                 obs, reward, done, _ = env.last()
                 
                 with utils.eval_mode(agent):
-                    actions[str_agent] = np.argmax(agent.select_action(obs), axis=1)
+                    actions[str_agent] = np.argmax(agent.select_action(obs))
 
 
                 if embed_viz_dir:
